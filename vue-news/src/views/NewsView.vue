@@ -1,26 +1,24 @@
 <template>
   <div>
-    <div v-for="user in users" :key="user.id">{{ user.title }}</div>
+    <list-item :items="news" />
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapGetters } from 'vuex';
+import ListItem from '../components/ListItem';
 
 export default {
-  data() {
-    return {
-      users: []
-    }
+  components: {
+    ListItem,
+  },
+  computed: {
+    ...mapGetters({
+      news : 'fetchedNews'
+    })
   },
   created() {
-    axios.get('https://api.hnpwa.com/v0/news/1.json')
-      .then(response => this.users = response.data)
-      .catch(error => console.log(error));
+    this.$store.dispatch('FETCH_NEWS');
   }
 }
 </script>
-
-<style>
-
-</style>

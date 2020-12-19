@@ -1,15 +1,24 @@
 <template>
   <div>
-    jobs
+    <list-item :items="jobs" />
   </div>
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
+import ListItem from '../components/ListItem';
 
+export default {
+  components: {
+    ListItem,
+  },
+  computed: {
+    ...mapGetters({
+      jobs: 'fetchedJobs'
+    })
+  },
+  created() {
+    this.$store.dispatch('FETCH_JOBS');
+  }
 }
 </script>
-
-<style>
-
-</style>

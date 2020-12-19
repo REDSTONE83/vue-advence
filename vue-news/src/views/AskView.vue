@@ -1,15 +1,24 @@
 <template>
   <div>
-    ask
+    <list-item :items="ask" />
   </div>
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
+import ListItem from '../components/ListItem';
 
+export default {
+  components: {
+    ListItem,
+  },
+  computed: {
+    ...mapGetters({
+      ask: 'fetchedAsk'
+    })
+  },
+  created() {
+    this.$store.dispatch('FETCH_ASK');
+  }
 }
 </script>
-
-<style>
-
-</style>
