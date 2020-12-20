@@ -1,20 +1,13 @@
 <template>
   <div class="container">
     <section>
-      <!-- 질문 상세 내역 -->
-      <div class="user-container">
-        <div>
-          <i class="fas fa-user"></i>
+      <!-- 사용자 상세 정보 -->
+      <user-profile :info="item">
+        <div slot="username">
+          <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
         </div>
-        <div class="user-description">
-          <router-link :to="`/user/${item.user}`">
-            {{ item.user }}
-          </router-link>
-          <div class="time">
-            {{ item.time_ago }}
-          </div>
-        </div>
-      </div>
+        <span slot="time">{{ 'Posted ' + item.time_ago }}</span>
+      </user-profile>
       
       <h2>{{ item.title }}</h2>
 
@@ -30,8 +23,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import UserProfile from '../components/UserProfile';
 
 export default {
+  components: {
+    UserProfile,
+  },
   computed: {
     ...mapGetters({
       item: 'fetchedItem'

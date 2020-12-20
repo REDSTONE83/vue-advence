@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <list-item :items="news" />
-  </div>
+  <list-item :items="items" />
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import ListItem from '../components/ListItem';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -14,11 +12,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      news : 'fetchedNews'
+      items: 'fetchedList'
     })
-  },
-  created() {
-    this.$store.dispatch('FETCH_NEWS');
   }
 }
 </script>
+
+<style>
+
+</style>
