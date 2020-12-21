@@ -1,12 +1,13 @@
 import { fetchUser, fetchItem, fetchList } from '../api';
 
-const fetchData = (fetchApi, commitName, { commit }) => {
-    return fetchApi()
-            .then(({ data }) => {
-                commit(commitName, data);
-                return data;
-            })
-            .catch(error => console.log(error));
+const fetchData = async (fetchApi, commitName, { commit }) => {
+    try {
+        const { data } = await fetchApi();
+        commit(commitName, data);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export default {
